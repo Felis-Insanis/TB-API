@@ -11,7 +11,7 @@ async function getHS() {
     let conn;
     try {
       conn = await pool.getConnection();
-      const rows = await conn.query("SELECT 1 as val");
+      const rows = await conn.query("SELECT * FROM highscore_db.Scores");
       console.log(rows); //[ {val: 1}, meta: ... ]
       const res = await conn.query("INSERT INTO highscoredb.Scores value (?, ?)", ["testing", "1"]);
       console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }

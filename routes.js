@@ -65,8 +65,10 @@ router.post("/add_score", async (req, res) => { // legger til score og nickname 
     const content = req.body;
     if (message.pass == "OwO") {
         console.log(req.body);
-        // pool.then(conn)
-        console.log("Request handled!")
+        let conn;
+        conn = await pool.getConnection();
+        const query = conn.query("INSERT INTO highscore_db.Scores VALUES (?, ?)", [content.nick, content.score]);
+        console.log(query);
         res.send("UwU");
     } else {
         res.send("nowo");

@@ -47,10 +47,13 @@ router.get("/highscore", async (req, res) => { // får frem highscore
         let conn;
         conn = await pool.getConnection();
         const scores = await conn.query("SELECT * FROM highscore_db.Scores");
-        let length = () => {if (scores.length < 10) {return scores.length} else {return 10}};
+        let length = 10;
+        if (scores.length < 10) {
+            length = scores.length;
+        }
         let answer = "nickname             | score\n";
-        for (let item = 0; item < length; item++) {
-            answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     // adding name row to response
+        for (let item = 0; item < scores.length; item++) {
+            answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     //adding name row to response
         }
 
         conn.close();

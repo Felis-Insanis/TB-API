@@ -48,8 +48,14 @@ router.get("/highscore", async (req, res) => { // får frem highscore
         conn = await pool.getConnection();
         const scores = await conn.query("SELECT * FROM highscore_db.Scores");
         let answer = "nickname             | score\n";
-        for (let item = 0; item < scores.length; item++) {
-            answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     //adding name row to response
+        for (let index = 0; index < scores.length; index++) {
+            const item = scores[index];
+            answer = answer + item.name;
+            for (let space = 0; space < 20 - item.name.length; space++) {
+                answer += " ";
+            }
+            answer = answer + ` | ${item.score}`
+            // answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     //adding name row to response
         }
 
         conn.close();

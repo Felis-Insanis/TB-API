@@ -50,7 +50,7 @@ router.get("/highscore", async (req, res) => { // får frem highscore
         let length = () => {if (scores.length < 10) {return scores.length} else {return 10}};
         let answer = "nickname             | score\n";
         for (let item = 0; item < length; item++) {
-            answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     //adding name row to response
+            answer = answer.concat(`${scores[item].nick} | ${scores[item].score}\n`);     // adding name row to response
         }
 
         conn.close();

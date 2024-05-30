@@ -49,11 +49,7 @@ router.get("/highscore", async (req, res) => { // får frem highscore
         const scores = await conn.query("SELECT * FROM highscore_db.Scores");
         let answer = "nickname             | score\n";
         for (const name in scores) {
-            answer += `${name}`;                                        //adding name to response
-            for (let index = 0; index < 20 - item.length; index++) {    //adding padding to response
-                answer += " ";
-            }
-            answer += ` | ${scores[name]}\n`;                           //adding score to response
+            answer += `${name} | ${scores[name]}\n`;                                        //adding name row to response
         }
         conn.close();
         res.send(answer);
